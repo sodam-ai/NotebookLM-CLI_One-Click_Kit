@@ -1,0 +1,432 @@
+@echo off
+chcp 65001 >nul
+setlocal EnableDelayedExpansion
+
+title NotebookLM MCP CLI - Menu
+set "SCRIPT_DIR=%~dp0"
+set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
+cd /d "%SCRIPT_DIR%"
+
+set "NLM_OK=0"
+set "MCP_OK=0"
+nlm --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 set "NLM_OK=1"
+notebooklm-mcp --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 set "MCP_OK=1"
+
+:MAIN_MENU
+cls
+echo.
+echo ============================================================
+echo   NotebookLM MCP CLI - Main Menu  v4
+if "!NLM_OK!"=="0" (
+echo   [!] nlm 명령 없음 -- INSTALL.bat 를 먼저 실행하세요
+)
+echo ============================================================
+echo.
+echo   -- MCP 서버 --
+echo    1. MCP 서버 시작
+echo.
+echo   -- 인증 관리 --
+echo    2. 로그인 (자동 - Chrome 브라우저)
+echo    3. 로그인 상태 확인
+echo    4. 수동 로그인 (쿠키 파일)
+echo    5. 인증 도구 단독 실행 (notebooklm-mcp-auth)
+echo    6. 프로필 목록 보기
+echo    7. 로그아웃 / 인증 데이터 삭제
+echo.
+echo   -- CLI 명령 --
+echo    8. nlm 명령 직접 입력
+echo    9. 노트북 목록
+echo   10. 노트북 생성
+echo   11. AI 도움말 (nlm --ai)
+echo.
+echo   -- 버전 관리 --
+echo   12. 현재 버전 확인
+echo   13. 일반 업데이트 (uv tool upgrade)
+echo   14. 강제 최신 업데이트 (uv install --force)
+echo.
+echo   -- 정보 --
+echo   15. MCP 설정 JSON 출력
+echo   16. 설치 경로 / 환경 정보
+echo.
+echo    0. 종료
+echo.
+echo ============================================================
+echo.
+set "CHOICE="
+set /p "CHOICE= 번호를 입력하세요 [0-16]: "
+if "!CHOICE!"=="0"  goto :EXIT
+if "!CHOICE!"=="1"  goto :START_MCP
+if "!CHOICE!"=="2"  goto :LOGIN_AUTO
+if "!CHOICE!"=="3"  goto :LOGIN_CHECK
+if "!CHOICE!"=="4"  goto :LOGIN_MANUAL
+if "!CHOICE!"=="5"  goto :AUTH_TOOL
+if "!CHOICE!"=="6"  goto :PROFILE_LIST
+if "!CHOICE!"=="7"  goto :LOGOUT
+if "!CHOICE!"=="8"  goto :NLM_CLI
+if "!CHOICE!"=="9"  goto :NOTEBOOK_LIST
+if "!CHOICE!"=="10" goto :NOTEBOOK_CREATE
+if "!CHOICE!"=="11" goto :NLM_AI
+if "!CHOICE!"=="12" goto :VERSION_CHECK
+if "!CHOICE!"=="13" goto :UPDATE_NORMAL
+if "!CHOICE!"=="14" goto :UPDATE_FORCE
+if "!CHOICE!"=="15" goto :MCP_CONFIG
+if "!CHOICE!"=="16" goto :ENV_INFO
+echo [WARNING] 잘못된 입력입니다.
+timeout /t 2 >nul
+goto :MAIN_MENU
+
+:START_MCP
+cls
+echo.
+echo ---- [1] MCP 서버 시작 ------------------------------------
+echo.
+if "!MCP_OK!"=="0" (
+    echo [ERROR] notebooklm-mcp 없음. INSTALL.bat 를 먼저 실행하세요.
+    pause & goto :MAIN_MENU
+)
+echo  MCP 서버를 시작합니다. 종료: Ctrl+C
+echo  -----------------------------------------------------------
+notebooklm-mcp
+echo  -----------------------------------------------------------
+echo.
+echo  MCP 서버가 종료되었습니다.
+pause
+goto :MAIN_MENU
+
+:LOGIN_AUTO
+cls
+echo.
+echo ---- [2] 자동 로그인 (Chrome) -----------------------------
+echo.
+echo  Chrome 브라우저가 실행됩니다.
+echo  복수 계정 사용 시 프로필명 입력 (기본이면 Enter)
+set "PROFILE="
+set /p "PROFILE= 프로필명 (Enter=기본): "
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+if "!PROFILE!"=="" ( nlm login ) else ( nlm login --profile "!PROFILE!" )
+echo.
+pause
+goto :MAIN_MENU
+
+:LOGIN_CHECK
+cls
+echo.
+echo ---- [3] 로그인 상태 확인 ---------------------------------
+echo.
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+nlm login --check
+echo.
+pause
+goto :MAIN_MENU
+
+:LOGIN_MANUAL
+cls
+echo.
+echo ---- [4] 수동 로그인 (쿠키 파일) -------------------------
+echo.
+echo  예: %USERPROFILE%\Downloads\cookies.txt
+echo.
+set "COOKIE_FILE="
+set /p "COOKIE_FILE= 쿠키 파일 경로: "
+if "!COOKIE_FILE!"=="" ( echo [WARNING] 입력 없음. & pause & goto :MAIN_MENU )
+if not exist "!COOKIE_FILE!" ( echo [ERROR] 파일 없음: !COOKIE_FILE! & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+nlm login --manual --file "!COOKIE_FILE!"
+echo.
+pause
+goto :MAIN_MENU
+
+:AUTH_TOOL
+cls
+echo.
+echo ---- [5] 인증 도구 단독 실행 ------------------------------
+echo.
+notebooklm-mcp-auth --version >nul 2>&1
+if %ERRORLEVEL% NEQ 0 ( echo [ERROR] notebooklm-mcp-auth 없음. & pause & goto :MAIN_MENU )
+notebooklm-mcp-auth
+echo.
+pause
+goto :MAIN_MENU
+
+:PROFILE_LIST
+cls
+echo.
+echo ---- [6] 프로필 목록 --------------------------------------
+echo.
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+nlm login profile list
+echo.
+pause
+goto :MAIN_MENU
+
+:LOGOUT
+cls
+echo.
+echo ---- [7] 로그아웃 / 인증 데이터 삭제 ---------------------
+echo.
+echo [WARNING] 저장된 쿠키와 인증 데이터를 삭제합니다.
+echo.
+set "CONFIRM="
+set /p "CONFIRM= 계속하시겠습니까? (yes 입력): "
+if /i "!CONFIRM!" NEQ "yes" ( echo  취소됨. & pause & goto :MAIN_MENU )
+set "AUTH_DIR=%USERPROFILE%\.notebooklm-mcp-cli"
+if exist "!AUTH_DIR!" (
+    rmdir /s /q "!AUTH_DIR!" 2>nul
+    if !ERRORLEVEL! EQU 0 ( echo [OK]  삭제 완료: !AUTH_DIR!
+    ) else ( echo [WARNING] 삭제 실패. 수동 삭제: !AUTH_DIR! )
+) else ( echo [INFO] 인증 데이터 없음 )
+echo.
+echo  재사용하려면 메뉴 [2번] 에서 다시 로그인하세요.
+pause
+goto :MAIN_MENU
+
+:NLM_CLI
+cls
+echo.
+echo ---- [8] nlm 명령 직접 실행 -------------------------------
+echo.
+echo  예: notebook list  /  notebook create "이름"  /  --help  /  --ai
+echo.
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+set "NLM_ARGS="
+set /p "NLM_ARGS= nlm 뒤에 올 명령 (Enter=--help): "
+if "!NLM_ARGS!"=="" ( nlm --help ) else ( nlm !NLM_ARGS! )
+echo.
+pause
+goto :MAIN_MENU
+
+:NOTEBOOK_LIST
+cls
+echo.
+echo ---- [9] 노트북 목록 --------------------------------------
+echo.
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+nlm notebook list
+echo.
+pause
+goto :MAIN_MENU
+
+:NOTEBOOK_CREATE
+cls
+echo.
+echo ---- [10] 노트북 생성 -------------------------------------
+echo.
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+set "NB_NAME="
+set /p "NB_NAME= 새 노트북 이름: "
+if "!NB_NAME!"=="" ( echo [WARNING] 이름 없음. & pause & goto :MAIN_MENU )
+nlm notebook create "!NB_NAME!"
+echo.
+pause
+goto :MAIN_MENU
+
+:NLM_AI
+cls
+echo.
+echo ---- [11] AI 도움말 (nlm --ai) ----------------------------
+echo.
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm 없음. & pause & goto :MAIN_MENU )
+nlm --ai
+echo.
+pause
+goto :MAIN_MENU
+
+:VERSION_CHECK
+cls
+echo.
+echo ---- [12] 버전 확인 ----------------------------------------
+echo.
+echo  -- 설치된 버전 --
+nlm --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 ( for /f "delims=" %%v in ('nlm --version 2^>^&1') do echo  nlm   : %%v
+) else ( echo  nlm   : 명령 없음 )
+echo.
+echo  -- uv 도구 목록 --
+uv --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 ( uv tool list 2>nul | findstr /i "notebooklm"
+) else ( echo  uv 없음 )
+echo.
+echo  -- pip 패키지 정보 --
+call :FIND_PYTHON >nul 2>&1
+if defined PYTHON ( "%PYTHON%" -m pip show notebooklm-mcp-cli 2>nul | findstr /i "Name Version" )
+echo.
+pause
+goto :MAIN_MENU
+
+:UPDATE_NORMAL
+cls
+echo.
+echo ---- [13] 일반 업데이트 (uv tool upgrade) -----------------
+echo.
+echo [NOTE] 버전 제약으로 최신이 안 받아질 수 있습니다.
+echo        그럴 경우 메뉴 [14번] 강제 업데이트를 사용하세요.
+echo.
+uv --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 ( uv tool upgrade notebooklm-mcp-cli & goto :UPD1_DONE )
+call :FIND_PYTHON >nul 2>&1
+if defined PYTHON ( "%PYTHON%" -m pip install --upgrade notebooklm-mcp-cli )
+:UPD1_DONE
+echo.
+echo  완료. 버전 확인: 메뉴 [12번]
+pause
+goto :MAIN_MENU
+
+:UPDATE_FORCE
+cls
+echo.
+echo ---- [14] 강제 최신 업데이트 (--force) --------------------
+echo.
+echo  PyPI 절대 최신 버전으로 강제 재설치합니다.
+echo.
+uv --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 ( uv tool install --force notebooklm-mcp-cli & goto :UPD2_DONE )
+call :FIND_PYTHON >nul 2>&1
+if defined PYTHON ( "%PYTHON%" -m pip install --upgrade --force-reinstall notebooklm-mcp-cli )
+:UPD2_DONE
+echo.
+nlm --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 for /f "delims=" %%v in ('nlm --version 2^>^&1') do echo [OK]  버전: %%v
+echo.
+pause
+goto :MAIN_MENU
+
+:MCP_CONFIG
+cls
+echo.
+echo ---- [15] MCP 설정 JSON ------------------------------------
+echo.
+echo  -- 기본 방식 (설치 후 권장) --
+echo  {
+echo    "mcpServers": {
+echo      "notebooklm-mcp": {
+echo        "command": "notebooklm-mcp"
+echo      }
+echo    }
+echo  }
+echo.
+echo  -- uvx 방식 (설치 없이 실행) --
+echo  {
+echo    "mcpServers": {
+echo      "notebooklm-mcp": {
+echo        "command": "uvx",
+echo        "args": ["--from", "notebooklm-mcp-cli", "notebooklm-mcp"]
+echo      }
+echo    }
+echo  }
+echo.
+echo  -- 설정 파일 위치 --
+echo   Claude Desktop : %APPDATA%\Claude\claude_desktop_config.json
+echo   Cursor         : %USERPROFILE%\.cursor\mcp.json
+echo   VS Code        : %USERPROFILE%\.vscode\mcp.json
+echo   Gemini CLI     : %USERPROFILE%\.gemini\settings.json
+echo.
+echo  -- 명령줄 등록 --
+echo   claude mcp add --scope user notebooklm-mcp notebooklm-mcp
+echo   gemini mcp add --scope user notebooklm-mcp notebooklm-mcp
+echo.
+pause
+goto :MAIN_MENU
+
+:ENV_INFO
+cls
+echo.
+echo ---- [16] 설치 경로 / 환경 정보 ---------------------------
+echo.
+echo  -- 실행 파일 경로 --
+for /f "delims=" %%p in ('where nlm 2^>nul') do              echo  nlm                : %%p
+for /f "delims=" %%p in ('where notebooklm-mcp 2^>nul') do   echo  notebooklm-mcp     : %%p
+for /f "delims=" %%p in ('where notebooklm-mcp-auth 2^>nul') do echo  notebooklm-mcp-auth: %%p
+echo.
+echo  -- 인증 데이터 --
+echo  %USERPROFILE%\.notebooklm-mcp-cli
+if exist "%USERPROFILE%\.notebooklm-mcp-cli" ( echo  [존재함] & dir /b "%USERPROFILE%\.notebooklm-mcp-cli" 2>nul
+) else ( echo  [없음 - 로그인 전] )
+echo.
+echo  -- Python 탐지 결과 --
+call :FIND_PYTHON >nul 2>&1
+if defined PYTHON ( echo  Python : !PYTHON! ) else ( echo  Python : 탐지 실패 )
+echo.
+echo  -- 런타임 버전 --
+uv --version >nul 2>&1
+if %ERRORLEVEL% EQU 0 for /f "delims=" %%v in ('uv --version 2^>^&1') do echo  uv     : %%v
+echo.
+echo  -- 현재 스크립트 --
+echo  %SCRIPT_DIR%
+echo.
+pause
+goto :MAIN_MENU
+
+:EXIT
+echo.
+echo  종료합니다.
+echo.
+exit /b 0
+
+REM ============================================================
+REM  :FIND_PYTHON  v4 -- 실제 python.exe 절대경로를 PYTHON 에 저장
+REM ============================================================
+:FIND_PYTHON
+set "PYTHON="
+
+REM [단계1] py 런처 -> sys.executable 로 실제 경로 추출
+py -3 --version >nul 2>&1
+if %ERRORLEVEL% NEQ 0 goto :FP_STEP2
+for /f "usebackq delims=" %%P in (`py -3 -c "import sys;print(sys.executable)" 2^>nul`) do (
+    if exist "%%P" ( set "PYTHON=%%P" & goto :FP_DONE )
+)
+
+:FP_STEP2
+REM [단계2] where python -> WindowsApps 스텁 제외
+for /f "usebackq delims=" %%P in (`where python 2^>nul`) do (
+    echo %%P | findstr /i "WindowsApps" >nul 2>&1
+    if !ERRORLEVEL! NEQ 0 (
+        if exist "%%P" ( set "PYTHON=%%P" & goto :FP_DONE )
+    )
+)
+for /f "usebackq delims=" %%P in (`where python3 2^>nul`) do (
+    echo %%P | findstr /i "WindowsApps" >nul 2>&1
+    if !ERRORLEVEL! NEQ 0 (
+        if exist "%%P" ( set "PYTHON=%%P" & goto :FP_DONE )
+    )
+)
+
+REM [단계3] 표준 설치 경로 직접 탐색 (3.10~3.13)
+for %%V in (313 312 311 310) do (
+    for %%D in (
+        "%LOCALAPPDATA%\Programs\Python\Python%%V\python.exe"
+        "%PROGRAMFILES%\Python%%V\python.exe"
+        "%PROGRAMFILES(X86)%\Python%%V\python.exe"
+        "%USERPROFILE%\AppData\Local\Programs\Python\Python%%V\python.exe"
+    ) do (
+        if exist %%D ( set "PYTHON=%%~D" & goto :FP_DONE )
+    )
+)
+
+REM [단계4] Anaconda / Miniconda
+for %%D in (
+    "%USERPROFILE%\anaconda3\python.exe"
+    "%USERPROFILE%\miniconda3\python.exe"
+    "%PROGRAMDATA%\anaconda3\python.exe"
+    "%PROGRAMDATA%\miniconda3\python.exe"
+) do (
+    if exist %%D ( set "PYTHON=%%~D" & goto :FP_DONE )
+)
+
+REM -- 모든 단계 실패 --
+echo.
+echo [ERROR] Python 을 찾을 수 없습니다!
+echo         확인 방법:
+echo          1. 새 cmd 창에서  py --version  입력
+echo          2. https://www.python.org/downloads/ 에서 재설치
+echo          3. 설치 시 "Add Python to PATH" 반드시 체크
+echo.
+goto :FP_FAIL
+
+:FP_DONE
+goto :EOF
+
+:FP_FAIL
+pause
+exit /b 2
