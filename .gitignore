@@ -1,0 +1,20 @@
+# 배포 아카이브 (GitHub Release에 첨부)
+*.7z
+*.zip
+*.tar.gz
+
+# Windows 시스템 파일
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 임시 파일
+*.tmp
+*.bak
+*.log
+
+# 에디터
+.vscode/
+.idea/
+*.swp
