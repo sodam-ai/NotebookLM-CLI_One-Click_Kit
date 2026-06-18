@@ -1,8 +1,8 @@
 @echo off
-chcp 65001 >nul
+chcp 949 >nul
 setlocal EnableDelayedExpansion
 
-title NotebookLM MCP CLI - Menu
+title NotebookLM MCP CLI - ¸Þ´º (Menu)
 set "SCRIPT_DIR=%~dp0"
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
 cd /d "%SCRIPT_DIR%"
@@ -18,50 +18,55 @@ if %ERRORLEVEL% EQU 0 set "MCP_OK=1"
 cls
 echo.
 echo ============================================================
-echo   NotebookLM MCP CLI - Main Menu  v4
+echo   NotebookLM MCP CLI - ¸ÞÀÎ ¸Þ´º  v5
 if "!NLM_OK!"=="0" (
-echo   [!] nlm ëª…ë ¹ ì—†ìŒ -- INSTALL.bat ë¥¼ ë¨¼ì € ì‹¤í–‰í•˜ì„¸ìš”
+echo   [!] ¾ÆÁ÷ ¼³Ä¡°¡ ¾È µÆ½À´Ï´Ù -- ¸ÕÀú INSTALL.bat À» ½ÇÇàÇÏ¼¼¿ä
 )
 echo ============================================================
 echo.
-echo   -- MCP ì„œë²„ --
-echo    1. MCP ì„œë²„ ì‹œìž‘
+echo    Ã³À½ ¿À¼Ì³ª¿ä?   ==^>   S.  ½¬¿î ½ÃÀÛ (Â÷±ÙÂ÷±Ù ¾È³»)
 echo.
-echo   -- ì¸ì¦ ê´€ë¦¬ --
-echo    2. ë¡œê·¸ì¸ (ìžë™ - Chrome ë¸Œë¼ìš°ì €)
-echo    3. ë¡œê·¸ì¸ ìƒíƒœ í™•ì¸
-echo    4. ìˆ˜ë™ ë¡œê·¸ì¸ (ì¿ í‚¤ íŒŒì¼)
-echo    5. ì¸ì¦ ë„êµ¬ ë‹¨ë… ì‹¤í–‰ (notebooklm-mcp-auth)
-echo    6. í”„ë¡œí•„ ëª©ë¡ ë³´ê¸°
-echo    7. ë¡œê·¸ì•„ì›ƒ / ì¸ì¦ ë°ì´í„° ì‚­ì œ
+echo   -- ÀÚÁÖ ¾²´Â ±â´É --
+echo    1. MCP ¼­¹ö ½ÃÀÛ (AI ºñ¼­¿¡ ¿¬°áÇØ »ç¿ë)
+echo    2. ±¸±Û ·Î±×ÀÎ (Å©·Ò ÀÚµ¿)
+echo    3. ·Î±×ÀÎ µÆ´ÂÁö È®ÀÎ
+echo    9. ³» ³ëÆ®ºÏ ¸ñ·Ï º¸±â
+echo   10. »õ ³ëÆ®ºÏ ¸¸µé±â
 echo.
-echo   -- CLI ëª…ë ¹ --
-echo    8. nlm ëª…ë ¹ ì§ì ‘ ìž…ë ¥
-echo    9. ë…¸íŠ¸ë¶ ëª©ë¡
-echo   10. ë…¸íŠ¸ë¶ ìƒì„±
-echo   11. AI ë„ì›€ë§ (nlm --ai)
+echo   -- AI ºñ¼­¿¡ ¿¬°á (MCP) --
+echo   15. AI µµ±¸¿¡ ÀÚµ¿ ¿¬°á (Claude Code / Cursor)
 echo.
-echo   -- ë²„ì „ ê´€ë¦¬ --
-echo   12. í˜„ìž¬ ë²„ì „ í™•ì¸
-echo   13. ì¼ë°˜ ì—…ë°ì´íŠ¸ (uv tool upgrade)
-echo   14. ê°•ì œ ìµœì‹  ì—…ë°ì´íŠ¸ (uv install --force)
+echo   -- ÀÎÁõ(·Î±×ÀÎ) °ü¸® --
+echo    4. ¼öµ¿ ·Î±×ÀÎ (ÄíÅ° ÆÄÀÏ)
+echo    6. ÇÁ·ÎÇÊ(°èÁ¤) ¸ñ·Ï º¸±â
+echo    7. ·Î±×¾Æ¿ô / ÀÎÁõ µ¥ÀÌÅÍ »èÁ¦
 echo.
-echo   -- ì •ë³´ --
-echo   15. MCP ì„¤ì • JSON ì¶œë ¥
-echo   16. ì„¤ì¹˜ ê²½ë¡œ / í™˜ê²½ ì •ë³´
+echo   -- ¸í·É / µµ¿ò¸» --
+echo    8. nlm ¸í·É Á÷Á¢ ÀÔ·Â
+echo   11. AI µµ¿ò¸» (nlm --ai)
+echo    T. ½¬¿î ¿ë¾î Ç®ÀÌ (MCP, pip µîÀÌ ¹º°¡¿ä?)
 echo.
-echo    0. ì¢…ë£Œ
+echo   -- ¹®Á¦ ÇØ°á / ¹öÀü --
+echo    5. Áø´ÜÇÏ±â (¾È µÉ ¶§ - nlm doctor)
+echo   12. ÇöÀç ¹öÀü È®ÀÎ
+echo   13. ¾÷µ¥ÀÌÆ®
+echo   14. °­Á¦ ÃÖ½Å ¾÷µ¥ÀÌÆ®
+echo   16. ¼³Ä¡ °æ·Î / È¯°æ Á¤º¸
+echo.
+echo    0. Á¾·á
 echo.
 echo ============================================================
 echo.
 set "CHOICE="
-set /p "CHOICE= ë²ˆí˜¸ë¥¼ ìž…ë ¥í•˜ì„¸ìš” [0-16]: "
+set /p "CHOICE= ¹øÈ£(¶Ç´Â S, T)¸¦ ÀÔ·ÂÇÏ¼¼¿ä: "
+if /i "!CHOICE!"=="S"  goto :EASY_START
+if /i "!CHOICE!"=="T"  goto :GLOSSARY
 if "!CHOICE!"=="0"  goto :EXIT
 if "!CHOICE!"=="1"  goto :START_MCP
 if "!CHOICE!"=="2"  goto :LOGIN_AUTO
 if "!CHOICE!"=="3"  goto :LOGIN_CHECK
 if "!CHOICE!"=="4"  goto :LOGIN_MANUAL
-if "!CHOICE!"=="5"  goto :AUTH_TOOL
+if "!CHOICE!"=="5"  goto :DOCTOR
 if "!CHOICE!"=="6"  goto :PROFILE_LIST
 if "!CHOICE!"=="7"  goto :LOGOUT
 if "!CHOICE!"=="8"  goto :NLM_CLI
@@ -73,38 +78,123 @@ if "!CHOICE!"=="13" goto :UPDATE_NORMAL
 if "!CHOICE!"=="14" goto :UPDATE_FORCE
 if "!CHOICE!"=="15" goto :MCP_CONFIG
 if "!CHOICE!"=="16" goto :ENV_INFO
-echo [WARNING] ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤.
+echo [Âü°í] Àß¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. È­¸éÀÇ ¹øÈ£³ª S, T Áß¿¡¼­ °ñ¶óÁÖ¼¼¿ä.
 timeout /t 2 >nul
+goto :MAIN_MENU
+
+REM ============================================================
+REM  [S] ½¬¿î ½ÃÀÛ -- Ã³À½ ¾²´Â »ç¶÷À» À§ÇÑ 3´Ü°è ¾È³»
+REM ============================================================
+:EASY_START
+cls
+echo.
+echo ==== [½¬¿î ½ÃÀÛ] Ã³À½ÀÌ¶ó¸é ÀÌ´ë·Î µû¶ó¿À¼¼¿ä ============
+echo.
+echo  ÀÌ ÇÁ·Î±×·¥Àº ±¸±Û "NotebookLM"(³» ÀÚ·á·Î °øºÎ/¿ä¾àÇØÁÖ´Â AI)À»
+echo  ÄÄÇ»ÅÍ ¸í·É°ú AI ºñ¼­(Claude/Cursor)¿¡¼­ ¾²°Ô ÇØÁÝ´Ï´Ù.
+echo.
+if "!NLM_OK!"=="0" (
+    echo  [¸ØÃã] ¾ÆÁ÷ ¼³Ä¡°¡ ¾È µÆ½À´Ï´Ù.
+    echo         ÀÌ Ã¢À» ´Ý°í INSTALL.bat À» ¸ÕÀú ´õºíÅ¬¸¯ÇØ ÁÖ¼¼¿ä.
+    echo.
+    pause & goto :MAIN_MENU
+)
+echo  -- 1´Ü°è: ±¸±Û ·Î±×ÀÎ µÇ¾î ÀÖ´ÂÁö È®ÀÎ --
+echo.
+nlm login --check
+echo.
+echo  À§¿¡ "·Î±×ÀÎ µÊ/authenticated" °°Àº Ç¥½Ã°¡ ¾øÀ¸¸é ·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.
+set "GO="
+set /p "GO= Áö±Ý ±¸±Û ·Î±×ÀÎÀ» ÇÒ±î¿ä? (y = ¿¹ / Enter = °Ç³Ê¶Ù±â): "
+if /i "!GO!"=="y" (
+    echo.
+    echo  Å©·Ò Ã¢ÀÌ ¿­¸®¸é Æò¼ÒÃ³·³ ±¸±Û °èÁ¤À¸·Î ·Î±×ÀÎÇÏ¼¼¿ä.
+    nlm login
+)
+echo.
+echo  -- 2´Ü°è: AI ºñ¼­¿¡ ¿¬°á (¼±ÅÃ) --
+echo.
+echo  Claude Code ³ª Cursor ¸¦ ¾²½Å´Ù¸é ÀÚµ¿À¸·Î ¿¬°áÇÒ ¼ö ÀÖ½À´Ï´Ù.
+set "GO2="
+set /p "GO2= Áö±Ý ¿¬°áÇÒ±î¿ä? (1 = Claude Code / 2 = Cursor / Enter = ³ªÁß¿¡): "
+if "!GO2!"=="1" nlm setup add claude-code
+if "!GO2!"=="2" nlm setup add cursor
+echo.
+echo  -- 3´Ü°è: Ã¹ ³ëÆ®ºÏ ¸¸µé¾îº¸±â (¼±ÅÃ) --
+echo.
+set "GO3="
+set /p "GO3= ¿¬½À¿ë ³ëÆ®ºÏÀ» ¸¸µé¾îº¼±î¿ä? ÀÌ¸§ ÀÔ·Â (Enter = °Ç³Ê¶Ù±â): "
+if not "!GO3!"=="" nlm notebook create "!GO3!"
+echo.
+echo  ====== ÁØºñ ³¡! ======
+echo  ÀÌÁ¦ ¸Þ´º [1] MCP ¼­¹ö ½ÃÀÛ, [9] ³ëÆ®ºÏ ¸ñ·Ï µîÀ» ÀÚÀ¯·Ó°Ô ¾²¼¼¿ä.
+echo.
+pause
+goto :MAIN_MENU
+
+REM ============================================================
+REM  [T] ¿ë¾î Ç®ÀÌ -- ¾î·Á¿î ¸» ½±°Ô
+REM ============================================================
+:GLOSSARY
+cls
+echo.
+echo ==== [½¬¿î ¿ë¾î Ç®ÀÌ] ====================================
+echo.
+echo   NotebookLM : ³»°¡ ¿Ã¸° ÀÚ·á(¹®¼­/¸µÅ©)¸¦ ÀÐ°í ¿ä¾à/´äº¯ÇØÁÖ´Â
+echo                ±¸±ÛÀÇ AI ³ëÆ®.
+echo.
+echo   nlm        : À§ NotebookLM À» ÄÄÇ»ÅÍ¿¡¼­ ¸í·ÉÀ¸·Î ´Ù·ç´Â µµ±¸.
+echo                (¿¹: nlm notebook list = ³» ³ëÆ®ºÏ ¸ñ·Ï º¸±â)
+echo.
+echo   MCP        : AI ºñ¼­(Claude/Cursor)¿¡°Ô ÀÌ µµ±¸¸¦ ¿¬°áÇØÁÖ´Â "´Ù¸®".
+echo                ¿¬°áÇÏ¸é AI°¡ Á÷Á¢ ³» NotebookLM À» ¾µ ¼ö ÀÖ½À´Ï´Ù.
+echo.
+echo   ¼­¹ö       : ¸Þ´º [1] ·Î ÄÑµÎ¸é AI ºñ¼­°¡ Á¢¼ÓÇÏ´Â "ÀüÈ­¼±".
+echo                ²ô·Á¸é ±× Ã¢¿¡¼­ Ctrl+C.
+echo.
+echo   Python/pip : ÀÌ µµ±¸°¡ µ¹¾Æ°¡´Â µ¥ ÇÊ¿äÇÑ ¹ÙÅÁ ÇÁ·Î±×·¥(¿£Áø)°ú
+echo                ±× ºÎÇ°À» ¹Þ¾Æ¿À´Â ¼³Ä¡ µµ¿ì¹Ì. ¼³Ä¡´Â ÀÚµ¿ÀÔ´Ï´Ù.
+echo.
+echo   uv         : pip º¸´Ù ºü¸¥ ÃÖ½Å ¼³Ä¡ µµ¿ì¹Ì. ÀÚµ¿À¸·Î ¾¹´Ï´Ù.
+echo.
+echo   ·Î±×ÀÎ/ÄíÅ° : ±¸±Û °èÁ¤ ÀÎÁõ Á¤º¸. ÇÑ ¹ø ·Î±×ÀÎÇÏ¸é ÀúÀåµË´Ï´Ù.
+echo   ÇÁ·ÎÇÊ      : °èÁ¤ÀÌ ¿©·¯ °³ÀÏ ¶§ ±¸ºÐÇÏ´Â ÀÌ¸§Ç¥.
+echo.
+echo   PATH       : ÄÄÇ»ÅÍ°¡ ¸í·É(nlm)À» Ã£´Â ±æ. ¼³Ä¡ ÈÄ »õ Ã¢¿¡¼­ ÀâÈû.
+echo.
+pause
 goto :MAIN_MENU
 
 :START_MCP
 cls
 echo.
-echo ---- [1] MCP ì„œë²„ ì‹œìž‘ ------------------------------------
+echo ---- [1] MCP ¼­¹ö ½ÃÀÛ ------------------------------------
 echo.
 if "!MCP_OK!"=="0" (
-    echo [ERROR] notebooklm-mcp ì—†ìŒ. INSTALL.bat ë¥¼ ë¨¼ì € ì‹¤í–‰í•˜ì„¸ìš”.
+    echo [ERROR] notebooklm-mcp ¾øÀ½. INSTALL.bat ¸¦ ¸ÕÀú ½ÇÇàÇÏ¼¼¿ä.
     pause & goto :MAIN_MENU
 )
-echo  MCP ì„œë²„ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. ì¢…ë£Œ: Ctrl+C
+echo  MCP ¼­¹ö¸¦ ½ÃÀÛÇÕ´Ï´Ù.
+echo  - ÀÌ Ã¢Àº ÄÑµÐ Ã¤·Î µÎ¸é AI ºñ¼­°¡ Á¢¼ÓÇÕ´Ï´Ù.
+echo  - ²ô·Á¸é ÀÌ Ã¢¿¡¼­  Ctrl+C  ¸¦ ´©¸£¼¼¿ä.
 echo  -----------------------------------------------------------
 notebooklm-mcp
 echo  -----------------------------------------------------------
 echo.
-echo  MCP ì„œë²„ê°€ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
+echo  MCP ¼­¹ö°¡ Á¾·áµÇ¾ú½À´Ï´Ù.
 pause
 goto :MAIN_MENU
 
 :LOGIN_AUTO
 cls
 echo.
-echo ---- [2] ìžë™ ë¡œê·¸ì¸ (Chrome) -----------------------------
+echo ---- [2] ±¸±Û ·Î±×ÀÎ (Å©·Ò ÀÚµ¿) --------------------------
 echo.
-echo  Chrome ë¸Œë¼ìš°ì €ê°€ ì‹¤í–‰ë©ë‹ˆë‹¤.
-echo  ë³µìˆ˜ ê³„ì • ì‚¬ìš© ì‹œ í”„ë¡œí•„ëª… ìž…ë ¥ (ê¸°ë³¸ì´ë©´ Enter)
+echo  Å©·Ò ºê¶ó¿ìÀú°¡ ¿­¸®¸é Æò¼ÒÃ³·³ ±¸±Û °èÁ¤À¸·Î ·Î±×ÀÎÇÏ¼¼¿ä.
+echo  °èÁ¤ÀÌ ¿©·¯ °³¸é ÇÁ·ÎÇÊ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä. (ÇÏ³ª¸é ±×³É Enter)
 set "PROFILE="
-set /p "PROFILE= í”„ë¡œí•„ëª… (Enter=ê¸°ë³¸): "
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+set /p "PROFILE= ÇÁ·ÎÇÊ¸í (Enter=±âº»): "
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 if "!PROFILE!"=="" ( nlm login ) else ( nlm login --profile "!PROFILE!" )
 echo.
 pause
@@ -113,9 +203,9 @@ goto :MAIN_MENU
 :LOGIN_CHECK
 cls
 echo.
-echo ---- [3] ë¡œê·¸ì¸ ìƒíƒœ í™•ì¸ ---------------------------------
+echo ---- [3] ·Î±×ÀÎ »óÅÂ È®ÀÎ ---------------------------------
 echo.
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 nlm login --check
 echo.
 pause
@@ -124,28 +214,40 @@ goto :MAIN_MENU
 :LOGIN_MANUAL
 cls
 echo.
-echo ---- [4] ìˆ˜ë™ ë¡œê·¸ì¸ (ì¿ í‚¤ íŒŒì¼) -------------------------
+echo ---- [4] ¼öµ¿ ·Î±×ÀÎ (ÄíÅ° ÆÄÀÏ) -------------------------
 echo.
-echo  ì˜ˆ: %USERPROFILE%\Downloads\cookies.txt
+echo  ÀÚµ¿ ·Î±×ÀÎÀÌ ¾È µÉ ¶§¸¸ ¾²¼¼¿ä. ÄíÅ° ÆÄÀÏÀÌ ÇÊ¿äÇÕ´Ï´Ù.
+echo  ¿¹: %USERPROFILE%\Downloads\cookies.txt
 echo.
 set "COOKIE_FILE="
-set /p "COOKIE_FILE= ì¿ í‚¤ íŒŒì¼ ê²½ë¡œ: "
-if "!COOKIE_FILE!"=="" ( echo [WARNING] ìž…ë ¥ ì—†ìŒ. & pause & goto :MAIN_MENU )
-if not exist "!COOKIE_FILE!" ( echo [ERROR] íŒŒì¼ ì—†ìŒ: !COOKIE_FILE! & pause & goto :MAIN_MENU )
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+set /p "COOKIE_FILE= ÄíÅ° ÆÄÀÏ °æ·Î: "
+if "!COOKIE_FILE!"=="" ( echo [Âü°í] ÀÔ·ÂÀÌ ¾ø¾î Ãë¼ÒÇÕ´Ï´Ù. & pause & goto :MAIN_MENU )
+if not exist "!COOKIE_FILE!" ( echo [ERROR] ±× À§Ä¡¿¡ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù: !COOKIE_FILE! & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 nlm login --manual --file "!COOKIE_FILE!"
 echo.
 pause
 goto :MAIN_MENU
 
-:AUTH_TOOL
+:DOCTOR
 cls
 echo.
-echo ---- [5] ì¸ì¦ ë„êµ¬ ë‹¨ë… ì‹¤í–‰ ------------------------------
+echo ---- [5] Áø´ÜÇÏ±â (nlm doctor) ----------------------------
 echo.
-notebooklm-mcp-auth --version >nul 2>&1
-if %ERRORLEVEL% NEQ 0 ( echo [ERROR] notebooklm-mcp-auth ì—†ìŒ. & pause & goto :MAIN_MENU )
-notebooklm-mcp-auth
+echo  ¹º°¡ Àß ¾È µÉ ¶§ ´©¸£¼¼¿ä. ¼³Ä¡/·Î±×ÀÎ ¹®Á¦¸¦ ÀÚµ¿ Á¡°ËÇÕ´Ï´Ù.
+echo  -----------------------------------------------------------
+if "!NLM_OK!"=="0" (
+    echo [ERROR] nlm ¸í·ÉÀÌ ¾ø½À´Ï´Ù = ¾ÆÁ÷ ¼³Ä¡°¡ ¾È µÆ´Ù´Â ¶æÀÔ´Ï´Ù.
+    echo         ÀÌ Ã¢À» ´Ý°í INSTALL.bat À» ¸ÕÀú ½ÇÇàÇÏ¼¼¿ä.
+    pause & goto :MAIN_MENU
+)
+nlm doctor
+echo  -----------------------------------------------------------
+echo.
+echo  [µµ¿ò¸»] À§ °á°ú¿¡¼­ »¡°£ X ³ª FAIL ÀÌ ÀÖÀ¸¸é:
+echo   - ·Î±×ÀÎ ¹®Á¦¸é  ¸Þ´º [2] ·Î ´Ù½Ã ·Î±×ÀÎ
+echo   - ¹öÀü ¹®Á¦¸é    ¸Þ´º [14] °­Á¦ ÃÖ½Å ¾÷µ¥ÀÌÆ®
+echo   - ±×·¡µµ ¾È µÇ¸é ¸Þ´º [7] ·Î±×¾Æ¿ô ÈÄ [2] Àç·Î±×ÀÎ
 echo.
 pause
 goto :MAIN_MENU
@@ -153,9 +255,9 @@ goto :MAIN_MENU
 :PROFILE_LIST
 cls
 echo.
-echo ---- [6] í”„ë¡œí•„ ëª©ë¡ --------------------------------------
+echo ---- [6] ÇÁ·ÎÇÊ(°èÁ¤) ¸ñ·Ï --------------------------------
 echo.
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 nlm login profile list
 echo.
 pause
@@ -164,34 +266,36 @@ goto :MAIN_MENU
 :LOGOUT
 cls
 echo.
-echo ---- [7] ë¡œê·¸ì•„ì›ƒ / ì¸ì¦ ë°ì´í„° ì‚­ì œ ---------------------
+echo ---- [7] ·Î±×¾Æ¿ô / ÀÎÁõ µ¥ÀÌÅÍ »èÁ¦ ---------------------
 echo.
-echo [WARNING] ì €ìž¥ëœ ì¿ í‚¤ì™€ ì¸ì¦ ë°ì´í„°ë¥¼ ì‚­ì œí•©ë‹ˆë‹¤.
+echo [ÁÖÀÇ] ÀúÀåµÈ ±¸±Û ·Î±×ÀÎ Á¤º¸(ÄíÅ°)¸¦ ¸ðµÎ Áö¿ó´Ï´Ù.
+echo        ´Ù½Ã ¾²·Á¸é ¸Þ´º [2] ¿¡¼­ Àç·Î±×ÀÎÇØ¾ß ÇÕ´Ï´Ù.
 echo.
 set "CONFIRM="
-set /p "CONFIRM= ê³„ì†í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (yes ìž…ë ¥): "
-if /i "!CONFIRM!" NEQ "yes" ( echo  ì·¨ì†Œë¨. & pause & goto :MAIN_MENU )
+set /p "CONFIRM= Á¤¸» Áö¿ï±î¿ä? Áö¿ì·Á¸é  yes  ¸¦ ÀÔ·Â: "
+if /i "!CONFIRM!" NEQ "yes" ( echo  Ãë¼ÒÇß½À´Ï´Ù. & pause & goto :MAIN_MENU )
 set "AUTH_DIR=%USERPROFILE%\.notebooklm-mcp-cli"
 if exist "!AUTH_DIR!" (
     rmdir /s /q "!AUTH_DIR!" 2>nul
-    if !ERRORLEVEL! EQU 0 ( echo [OK]  ì‚­ì œ ì™„ë£Œ: !AUTH_DIR!
-    ) else ( echo [WARNING] ì‚­ì œ ì‹¤íŒ¨. ìˆ˜ë™ ì‚­ì œ: !AUTH_DIR! )
-) else ( echo [INFO] ì¸ì¦ ë°ì´í„° ì—†ìŒ )
+    if !ERRORLEVEL! EQU 0 ( echo [OK]  »èÁ¦ ¿Ï·á: !AUTH_DIR!
+    ) else ( echo [WARNING] »èÁ¦ ½ÇÆÐ. ¼öµ¿ »èÁ¦: !AUTH_DIR! )
+) else ( echo [INFO] Áö¿ï ÀÎÁõ µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù. )
 echo.
-echo  ìž¬ì‚¬ìš©í•˜ë ¤ë©´ ë©”ë‰´ [2ë²ˆ] ì—ì„œ ë‹¤ì‹œ ë¡œê·¸ì¸í•˜ì„¸ìš”.
+echo  Àç»ç¿ëÇÏ·Á¸é ¸Þ´º [2¹ø] ¿¡¼­ ´Ù½Ã ·Î±×ÀÎÇÏ¼¼¿ä.
 pause
 goto :MAIN_MENU
 
 :NLM_CLI
 cls
 echo.
-echo ---- [8] nlm ëª…ë ¹ ì§ì ‘ ì‹¤í–‰ -------------------------------
+echo ---- [8] nlm ¸í·É Á÷Á¢ ½ÇÇà -------------------------------
 echo.
-echo  ì˜ˆ: notebook list  /  notebook create "ì´ë¦„"  /  --help  /  --ai
+echo  nlm µÚ¿¡ ¿Ã ¸»¸¸ ÀÔ·ÂÇÏ¼¼¿ä. (¾Æ´Â »ç¶÷¿ë)
+echo  ¿¹: notebook list  /  notebook create "ÀÌ¸§"  /  --help  /  --ai
 echo.
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 set "NLM_ARGS="
-set /p "NLM_ARGS= nlm ë’¤ì— ì˜¬ ëª…ë ¹ (Enter=--help): "
+set /p "NLM_ARGS= nlm µÚ¿¡ ¿Ã ¸í·É (Enter=--help): "
 if "!NLM_ARGS!"=="" ( nlm --help ) else ( nlm !NLM_ARGS! )
 echo.
 pause
@@ -200,9 +304,9 @@ goto :MAIN_MENU
 :NOTEBOOK_LIST
 cls
 echo.
-echo ---- [9] ë…¸íŠ¸ë¶ ëª©ë¡ --------------------------------------
+echo ---- [9] ³» ³ëÆ®ºÏ ¸ñ·Ï ------------------------------------
 echo.
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 nlm notebook list
 echo.
 pause
@@ -211,12 +315,12 @@ goto :MAIN_MENU
 :NOTEBOOK_CREATE
 cls
 echo.
-echo ---- [10] ë…¸íŠ¸ë¶ ìƒì„± -------------------------------------
+echo ---- [10] »õ ³ëÆ®ºÏ ¸¸µé±â --------------------------------
 echo.
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 set "NB_NAME="
-set /p "NB_NAME= ìƒˆ ë…¸íŠ¸ë¶ ì´ë¦„: "
-if "!NB_NAME!"=="" ( echo [WARNING] ì´ë¦„ ì—†ìŒ. & pause & goto :MAIN_MENU )
+set /p "NB_NAME= »õ ³ëÆ®ºÏ ÀÌ¸§: "
+if "!NB_NAME!"=="" ( echo [Âü°í] ÀÌ¸§ÀÌ ¾ø¾î Ãë¼ÒÇÕ´Ï´Ù. & pause & goto :MAIN_MENU )
 nlm notebook create "!NB_NAME!"
 echo.
 pause
@@ -225,9 +329,9 @@ goto :MAIN_MENU
 :NLM_AI
 cls
 echo.
-echo ---- [11] AI ë„ì›€ë§ (nlm --ai) ----------------------------
+echo ---- [11] AI µµ¿ò¸» (nlm --ai) ----------------------------
 echo.
-if "!NLM_OK!"=="0" ( echo [ERROR] nlm ì—†ìŒ. & pause & goto :MAIN_MENU )
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
 nlm --ai
 echo.
 pause
@@ -236,19 +340,19 @@ goto :MAIN_MENU
 :VERSION_CHECK
 cls
 echo.
-echo ---- [12] ë²„ì „ í™•ì¸ ----------------------------------------
+echo ---- [12] ¹öÀü È®ÀÎ ----------------------------------------
 echo.
-echo  -- ì„¤ì¹˜ëœ ë²„ì „ --
+echo  -- ¼³Ä¡µÈ ¹öÀü --
 nlm --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 ( for /f "delims=" %%v in ('nlm --version 2^>^&1') do echo  nlm   : %%v
-) else ( echo  nlm   : ëª…ë ¹ ì—†ìŒ )
+) else ( echo  nlm   : ¸í·É ¾øÀ½ )
 echo.
-echo  -- uv ë„êµ¬ ëª©ë¡ --
+echo  -- uv µµ±¸ ¸ñ·Ï --
 uv --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 ( uv tool list 2>nul | findstr /i "notebooklm"
-) else ( echo  uv ì—†ìŒ )
+) else ( echo  uv ¾øÀ½ )
 echo.
-echo  -- pip íŒ¨í‚¤ì§€ ì •ë³´ --
+echo  -- pip ÆÐÅ°Áö Á¤º¸ --
 call :FIND_PYTHON >nul 2>&1
 if defined PYTHON ( "%PYTHON%" -m pip show notebooklm-mcp-cli 2>nul | findstr /i "Name Version" )
 echo.
@@ -258,10 +362,10 @@ goto :MAIN_MENU
 :UPDATE_NORMAL
 cls
 echo.
-echo ---- [13] ì¼ë°˜ ì—…ë°ì´íŠ¸ (uv tool upgrade) -----------------
+echo ---- [13] ¾÷µ¥ÀÌÆ® (uv tool upgrade) ----------------------
 echo.
-echo [NOTE] ë²„ì „ ì œì•½ìœ¼ë¡œ ìµœì‹ ì´ ì•ˆ ë°›ì•„ì§ˆ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
-echo        ê·¸ëŸ´ ê²½ìš° ë©”ë‰´ [14ë²ˆ] ê°•ì œ ì—…ë°ì´íŠ¸ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”.
+echo [Âü°í] ¹öÀü Á¦¾àÀ¸·Î ÃÖ½ÅÀÌ ¾È ¹Þ¾ÆÁú ¼ö ÀÖ½À´Ï´Ù.
+echo        ±×·² ¶© ¸Þ´º [14] °­Á¦ ÃÖ½Å ¾÷µ¥ÀÌÆ®¸¦ ¾²¼¼¿ä.
 echo.
 uv --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 ( uv tool upgrade notebooklm-mcp-cli & goto :UPD1_DONE )
@@ -269,16 +373,16 @@ call :FIND_PYTHON >nul 2>&1
 if defined PYTHON ( "%PYTHON%" -m pip install --upgrade notebooklm-mcp-cli )
 :UPD1_DONE
 echo.
-echo  ì™„ë£Œ. ë²„ì „ í™•ì¸: ë©”ë‰´ [12ë²ˆ]
+echo  ¿Ï·á. ¹öÀü È®ÀÎ: ¸Þ´º [12¹ø]
 pause
 goto :MAIN_MENU
 
 :UPDATE_FORCE
 cls
 echo.
-echo ---- [14] ê°•ì œ ìµœì‹  ì—…ë°ì´íŠ¸ (--force) --------------------
+echo ---- [14] °­Á¦ ÃÖ½Å ¾÷µ¥ÀÌÆ® (--force) --------------------
 echo.
-echo  PyPI ì ˆëŒ€ ìµœì‹  ë²„ì „ìœ¼ë¡œ ê°•ì œ ìž¬ì„¤ì¹˜í•©ë‹ˆë‹¤.
+echo  PyPI ÀÇ °¡Àå ÃÖ½Å ¹öÀüÀ¸·Î °­Á¦·Î ´Ù½Ã ¼³Ä¡ÇÕ´Ï´Ù.
 echo.
 uv --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 ( uv tool install --force notebooklm-mcp-cli & goto :UPD2_DONE )
@@ -287,7 +391,7 @@ if defined PYTHON ( "%PYTHON%" -m pip install --upgrade --force-reinstall notebo
 :UPD2_DONE
 echo.
 nlm --version >nul 2>&1
-if %ERRORLEVEL% EQU 0 for /f "delims=" %%v in ('nlm --version 2^>^&1') do echo [OK]  ë²„ì „: %%v
+if %ERRORLEVEL% EQU 0 for /f "delims=" %%v in ('nlm --version 2^>^&1') do echo [OK]  ¹öÀü: %%v
 echo.
 pause
 goto :MAIN_MENU
@@ -295,9 +399,58 @@ goto :MAIN_MENU
 :MCP_CONFIG
 cls
 echo.
-echo ---- [15] MCP ì„¤ì • JSON ------------------------------------
+echo ---- [15] AI µµ±¸¿¡ ¿¬°á (MCP) ----------------------------
 echo.
-echo  -- ê¸°ë³¸ ë°©ì‹ (ì„¤ì¹˜ í›„ ê¶Œìž¥) --
+echo  ¾îµð¿¡ ¿¬°áÇÒ±î¿ä?
+echo    1. Claude Code ¿¡ ÀÚµ¿ ¿¬°á   (±ÇÀå)
+echo    2. Cursor ¿¡ ÀÚµ¿ ¿¬°á        (±ÇÀå)
+echo    3. ¼³Á¤ JSON ÆÄÀÏ ÀÚµ¿ »ý¼º
+echo    4. ¼öµ¿ ¼³Á¤ (JSON Á÷Á¢ º¹»ç - Claude Desktop/VS Code/Gemini)
+echo    0. µÚ·Î
+echo.
+set "MSEL="
+set /p "MSEL= ¹øÈ£ ¼±ÅÃ: "
+if "!MSEL!"=="0" goto :MAIN_MENU
+if "!MSEL!"=="1" goto :MCP_CLAUDE
+if "!MSEL!"=="2" goto :MCP_CURSOR
+if "!MSEL!"=="3" goto :MCP_JSON
+if "!MSEL!"=="4" goto :MCP_MANUAL
+echo [Âü°í] Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù.
+timeout /t 2 >nul
+goto :MCP_CONFIG
+
+:MCP_CLAUDE
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
+echo.
+nlm setup add claude-code
+echo.
+echo [OK]  ¿¬°áÀ» ½ÃµµÇß½À´Ï´Ù. Claude Code ¸¦ ²°´Ù ÄÑ¸é Àû¿ëµË´Ï´Ù.
+pause
+goto :MAIN_MENU
+
+:MCP_CURSOR
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
+echo.
+nlm setup add cursor
+echo.
+echo [OK]  ¿¬°áÀ» ½ÃµµÇß½À´Ï´Ù. Cursor ¸¦ ²°´Ù ÄÑ¸é Àû¿ëµË´Ï´Ù.
+pause
+goto :MAIN_MENU
+
+:MCP_JSON
+if "!NLM_OK!"=="0" ( echo [ERROR] nlm ¾øÀ½. INSTALL.bat ¸ÕÀú ½ÇÇà. & pause & goto :MAIN_MENU )
+echo.
+nlm setup add json
+echo.
+pause
+goto :MAIN_MENU
+
+:MCP_MANUAL
+cls
+echo.
+echo ---- [15-¼öµ¿] ¼³Á¤ JSON Á÷Á¢ º¹»ç ------------------------
+echo.
+echo  -- ±âº» ¹æ½Ä (¼³Ä¡ ÈÄ ±ÇÀå) --
 echo  {
 echo    "mcpServers": {
 echo      "notebooklm-mcp": {
@@ -306,7 +459,7 @@ echo      }
 echo    }
 echo  }
 echo.
-echo  -- uvx ë°©ì‹ (ì„¤ì¹˜ ì—†ì´ ì‹¤í–‰) --
+echo  -- uvx ¹æ½Ä (¼³Ä¡ ¾øÀÌ ½ÇÇà) --
 echo  {
 echo    "mcpServers": {
 echo      "notebooklm-mcp": {
@@ -316,13 +469,13 @@ echo      }
 echo    }
 echo  }
 echo.
-echo  -- ì„¤ì • íŒŒì¼ ìœ„ì¹˜ --
+echo  -- ¼³Á¤ ÆÄÀÏ À§Ä¡ --
 echo   Claude Desktop : %APPDATA%\Claude\claude_desktop_config.json
 echo   Cursor         : %USERPROFILE%\.cursor\mcp.json
 echo   VS Code        : %USERPROFILE%\.vscode\mcp.json
 echo   Gemini CLI     : %USERPROFILE%\.gemini\settings.json
 echo.
-echo  -- ëª…ë ¹ì¤„ ë“±ë¡ --
+echo  -- ¸í·ÉÁÙ µî·Ï --
 echo   claude mcp add --scope user notebooklm-mcp notebooklm-mcp
 echo   gemini mcp add --scope user notebooklm-mcp notebooklm-mcp
 echo.
@@ -332,27 +485,26 @@ goto :MAIN_MENU
 :ENV_INFO
 cls
 echo.
-echo ---- [16] ì„¤ì¹˜ ê²½ë¡œ / í™˜ê²½ ì •ë³´ ---------------------------
+echo ---- [16] ¼³Ä¡ °æ·Î / È¯°æ Á¤º¸ ---------------------------
 echo.
-echo  -- ì‹¤í–‰ íŒŒì¼ ê²½ë¡œ --
-for /f "delims=" %%p in ('where nlm 2^>nul') do              echo  nlm                : %%p
-for /f "delims=" %%p in ('where notebooklm-mcp 2^>nul') do   echo  notebooklm-mcp     : %%p
-for /f "delims=" %%p in ('where notebooklm-mcp-auth 2^>nul') do echo  notebooklm-mcp-auth: %%p
+echo  -- ½ÇÇà ÆÄÀÏ °æ·Î --
+for /f "delims=" %%p in ('where nlm 2^>nul') do              echo  nlm            : %%p
+for /f "delims=" %%p in ('where notebooklm-mcp 2^>nul') do   echo  notebooklm-mcp : %%p
 echo.
-echo  -- ì¸ì¦ ë°ì´í„° --
+echo  -- ÀÎÁõ µ¥ÀÌÅÍ --
 echo  %USERPROFILE%\.notebooklm-mcp-cli
-if exist "%USERPROFILE%\.notebooklm-mcp-cli" ( echo  [ì¡´ìž¬í•¨] & dir /b "%USERPROFILE%\.notebooklm-mcp-cli" 2>nul
-) else ( echo  [ì—†ìŒ - ë¡œê·¸ì¸ ì „] )
+if exist "%USERPROFILE%\.notebooklm-mcp-cli" ( echo  [Á¸ÀçÇÔ] & dir /b "%USERPROFILE%\.notebooklm-mcp-cli" 2>nul
+) else ( echo  [¾øÀ½ - ·Î±×ÀÎ Àü] )
 echo.
-echo  -- Python íƒì§€ ê²°ê³¼ --
+echo  -- Python Å½Áö °á°ú --
 call :FIND_PYTHON >nul 2>&1
-if defined PYTHON ( echo  Python : !PYTHON! ) else ( echo  Python : íƒì§€ ì‹¤íŒ¨ )
+if defined PYTHON ( echo  Python : !PYTHON! ) else ( echo  Python : Å½Áö ½ÇÆÐ )
 echo.
-echo  -- ëŸ°íƒ€ìž„ ë²„ì „ --
+echo  -- ·±Å¸ÀÓ ¹öÀü --
 uv --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 for /f "delims=" %%v in ('uv --version 2^>^&1') do echo  uv     : %%v
 echo.
-echo  -- í˜„ìž¬ ìŠ¤í¬ë¦½íŠ¸ --
+echo  -- ÇöÀç ½ºÅ©¸³Æ® --
 echo  %SCRIPT_DIR%
 echo.
 pause
@@ -360,17 +512,17 @@ goto :MAIN_MENU
 
 :EXIT
 echo.
-echo  ì¢…ë£Œí•©ë‹ˆë‹¤.
+echo  Á¾·áÇÕ´Ï´Ù. ¾È³çÈ÷ °¡¼¼¿ä!
 echo.
 exit /b 0
 
 REM ============================================================
-REM  :FIND_PYTHON  v4 -- ì‹¤ì œ python.exe ì ˆëŒ€ê²½ë¡œë¥¼ PYTHON ì— ì €ìž¥
+REM  :FIND_PYTHON  v4 -- ½ÇÁ¦ python.exe Àý´ë°æ·Î¸¦ PYTHON ¿¡ ÀúÀå
 REM ============================================================
 :FIND_PYTHON
 set "PYTHON="
 
-REM [ë‹¨ê³„1] py ëŸ°ì²˜ -> sys.executable ë¡œ ì‹¤ì œ ê²½ë¡œ ì¶”ì¶œ
+REM [´Ü°è1] py ·±Ã³ -> sys.executable ·Î ½ÇÁ¦ °æ·Î ÃßÃâ
 py -3 --version >nul 2>&1
 if %ERRORLEVEL% NEQ 0 goto :FP_STEP2
 for /f "usebackq delims=" %%P in (`py -3 -c "import sys;print(sys.executable)" 2^>nul`) do (
@@ -378,7 +530,7 @@ for /f "usebackq delims=" %%P in (`py -3 -c "import sys;print(sys.executable)" 2
 )
 
 :FP_STEP2
-REM [ë‹¨ê³„2] where python -> WindowsApps ìŠ¤í… ì œì™¸
+REM [´Ü°è2] where python -> WindowsApps ½ºÅÓ Á¦¿Ü
 for /f "usebackq delims=" %%P in (`where python 2^>nul`) do (
     echo %%P | findstr /i "WindowsApps" >nul 2>&1
     if !ERRORLEVEL! NEQ 0 (
@@ -392,7 +544,7 @@ for /f "usebackq delims=" %%P in (`where python3 2^>nul`) do (
     )
 )
 
-REM [ë‹¨ê³„3] í‘œì¤€ ì„¤ì¹˜ ê²½ë¡œ ì§ì ‘ íƒìƒ‰ (3.10~3.13)
+REM [´Ü°è3] Ç¥ÁØ ¼³Ä¡ °æ·Î Á÷Á¢ Å½»ö (3.10~3.13)
 for %%V in (313 312 311 310) do (
     for %%D in (
         "%LOCALAPPDATA%\Programs\Python\Python%%V\python.exe"
@@ -404,7 +556,7 @@ for %%V in (313 312 311 310) do (
     )
 )
 
-REM [ë‹¨ê³„4] Anaconda / Miniconda
+REM [´Ü°è4] Anaconda / Miniconda
 for %%D in (
     "%USERPROFILE%\anaconda3\python.exe"
     "%USERPROFILE%\miniconda3\python.exe"
@@ -414,19 +566,5 @@ for %%D in (
     if exist %%D ( set "PYTHON=%%~D" & goto :FP_DONE )
 )
 
-REM -- ëª¨ë“  ë‹¨ê³„ ì‹¤íŒ¨ --
-echo.
-echo [ERROR] Python ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!
-echo         í™•ì¸ ë°©ë²•:
-echo          1. ìƒˆ cmd ì°½ì—ì„œ  py --version  ìž…ë ¥
-echo          2. https://www.python.org/downloads/ ì—ì„œ ìž¬ì„¤ì¹˜
-echo          3. ì„¤ì¹˜ ì‹œ "Add Python to PATH" ë°˜ë“œì‹œ ì²´í¬
-echo.
-goto :FP_FAIL
-
 :FP_DONE
 goto :EOF
-
-:FP_FAIL
-pause
-exit /b 2
