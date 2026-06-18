@@ -1,0 +1,37 @@
+NotebookLM-CLI One-Click Kit
+Copyright 2026 SoDam AI Studio
+
+This product includes software developed by SoDam AI Studio.
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+------------------------------------------------------------------------
+Third-party software / 제3자 소프트웨어
+------------------------------------------------------------------------
+This kit is an installer/launcher helper. It downloads, installs, and runs
+the following independent third-party tool, which is NOT part of this kit
+and is distributed under its own license:
+
+  - notebooklm-mcp-cli
+    Source : https://github.com/jacob-bd/notebooklm-mcp-cli
+    PyPI   : https://pypi.org/project/notebooklm-mcp-cli/
+    License: MIT License (authoritative text: the project's own repository).
+
+이 키트는 위 독립 도구(notebooklm-mcp-cli)를 내려받아 설치·실행하는
+"도우미"일 뿐이며, 해당 도구는 이 키트의 일부가 아니고 자체 라이선스를
+따릅니다.
+
+------------------------------------------------------------------------
+Trademarks / 상표 고지
+------------------------------------------------------------------------
+"NotebookLM", "Google", "Chrome", and related marks are trademarks of
+Google LLC. "Claude" is a trademark of Anthropic. "Cursor" is a trademark
+of its respective owner.
+
+This kit is an UNOFFICIAL, independent helper and is NOT affiliated with,
+endorsed by, or sponsored by Google LLC, Anthropic, or any other company.
+All product names, logos, and brands are property of their respective owners
+and are used for identification purposes only.
+
+이 키트는 Google LLC, Anthropic 등 어떤 회사와도 제휴·후원·보증 관계가
+없는 비공식 도우미입니다. 모든 제품명·로고·상표는 각 소유자의 자산이며
+식별 목적으로만 사용되었습니다.
