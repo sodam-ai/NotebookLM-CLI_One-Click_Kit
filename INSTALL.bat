@@ -1,8 +1,8 @@
 @echo off
-chcp 65001 >nul
+chcp 949 >nul
 setlocal EnableDelayedExpansion
 
-title NotebookLM MCP CLI - Installation
+title NotebookLM MCP CLI - ¼³Ä¡ (Installation)
 set "SCRIPT_DIR=%~dp0"
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
 cd /d "%SCRIPT_DIR%"
@@ -10,51 +10,80 @@ cd /d "%SCRIPT_DIR%"
 cls
 echo.
 echo ============================================================
-echo   NotebookLM MCP CLI - One-Click Installer  v4
+echo   NotebookLM MCP CLI - ¿øÅ¬¸¯ ¼³Ä¡  v5
 echo   GitHub : jacob-bd/notebooklm-mcp-cli
 echo   PyPI   : notebooklm-mcp-cli
 echo ============================================================
 echo.
+echo   [ÀÌ ÇÁ·Î±×·¥ÀÌ ÇÏ´Â ÀÏ]
+echo    ±¸±Û NotebookLM À» ÄÄÇ»ÅÍ ¸í·É(nlm)°ú
+echo    AI ºñ¼­(Claude/Cursor µî)¿¡¼­ ¾µ ¼ö ÀÖ°Ô ¼³Ä¡ÇÕ´Ï´Ù.
+echo.
+echo   [¼³Ä¡ Àü ÁØºñ¹° 3°¡Áö]
+echo    1) ÀÎÅÍ³Ý ¿¬°á
+echo    2) ±¸±Û °èÁ¤ (·Î±×ÀÎ¿¡ ÇÊ¿ä)
+echo    3) Å©·Ò(Chrome) ºê¶ó¿ìÀú (ÀÚµ¿ ·Î±×ÀÎ¿¡ ÇÊ¿ä)
+echo.
+echo   * ÆÄÀÌ½ã(Python)ÀÌ ¾øÀ¸¸é ¾Æ·¡¿¡¼­ ¾È³»ÇØ µå¸³´Ï´Ù.
+echo.
+echo   ÁØºñµÇ¼ÌÀ¸¸é ¾Æ¹« Å°³ª ´©¸£¼¼¿ä. (±×¸¸µÎ·Á¸é ÀÌ Ã¢À» ´ÝÀ¸¼¼¿ä)
+pause >nul
+cls
 
 REM --------------------------------------------------------
-REM [1/5] Python íƒì§€ (4ë‹¨ê³„ ë°©ì–´, ì‹¤ì œ exe ê²½ë¡œ ì¶”ì¶œ)
+REM [1/6] ÀÎÅÍ³Ý ¿¬°á È®ÀÎ (¾øÀ¸¸é ¼³Ä¡ ´Ù¿î·Îµå°¡ ½ÇÆÐÇÔ)
 REM --------------------------------------------------------
-echo [1/5] Python í™•ì¸ ì¤‘...
+echo [1/6] ÀÎÅÍ³Ý ¿¬°á È®ÀÎ Áß...
+ping -n 1 pypi.org >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    echo [OK]  ÀÎÅÍ³Ý ¿¬°á Á¤»ó
+) else (
+    echo [ÁÖÀÇ] ÀÎÅÍ³ÝÀÌ ÀâÈ÷Áö ¾Ê´Â °Í °°½À´Ï´Ù.
+    echo        ( º¸¾È ÇÁ·Î±×·¥ÀÌ ¸·¾Æ Àß¸ø ¶ã ¼öµµ ÀÖ½À´Ï´Ù )
+    echo        ¿ÍÀÌÆÄÀÌ/·£¼±À» È®ÀÎÇÏ°í, °è¼ÓÇÏ·Á¸é ¾Æ¹« Å°³ª ´©¸£¼¼¿ä.
+    pause >nul
+)
+
+REM --------------------------------------------------------
+REM [2/6] Python Å½Áö (4´Ü°è ¹æ¾î, ½ÇÁ¦ exe °æ·Î ÃßÃâ)
+REM --------------------------------------------------------
+echo.
+echo [2/6] Python È®ÀÎ Áß...
 call :FIND_PYTHON
 if %ERRORLEVEL% NEQ 0 exit /b 2
 for /f "delims=" %%v in ('"%PYTHON%" --version 2^>^&1') do set "PY_VER=%%v"
 echo [OK]  !PY_VER!
-echo       ê²½ë¡œ: !PYTHON!
+echo       °æ·Î: !PYTHON!
 
 REM --------------------------------------------------------
-REM [2/5] pip í™•ì¸ (--user í™˜ê²½ í¬í•¨)
+REM [3/6] pip È®ÀÎ (--user È¯°æ Æ÷ÇÔ)
 REM --------------------------------------------------------
 echo.
-echo [2/5] pip í™•ì¸ ì¤‘...
+echo [3/6] pip È®ÀÎ Áß...
 "!PYTHON!" -m pip --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
     for /f "delims=" %%v in ('"%PYTHON%" -m pip --version 2^>^&1') do echo [OK]  %%v
     goto :PIP_OK
 )
-REM pip ì—†ìœ¼ë©´ ensurepip ìœ¼ë¡œ ì„¤ì¹˜ ì‹œë„
-echo [INFO] pip ì—†ìŒ. ensurepip ìœ¼ë¡œ ì„¤ì¹˜ ì‹œë„...
+REM pip ¾øÀ¸¸é ensurepip À¸·Î ¼³Ä¡ ½Ãµµ
+echo [INFO] pip ¾øÀ½. ensurepip À¸·Î ¼³Ä¡ ½Ãµµ...
 "!PYTHON!" -m ensurepip --upgrade >nul 2>&1
 "!PYTHON!" -m pip --version >nul 2>&1
-if %ERRORLEVEL% NEQ 0 (
+if %ERRORLEVEL% EQU 0 (
     for /f "delims=" %%v in ('"%PYTHON%" -m pip --version 2^>^&1') do echo [OK]  %%v
     goto :PIP_OK
 )
-echo [ERROR] pip ì„¤ì¹˜ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.
-echo [TIP]   Python ì„ ìž¬ì„¤ì¹˜í•˜ê±°ë‚˜ ê´€ë¦¬ìž ê¶Œí•œìœ¼ë¡œ ì‹¤í–‰í•´ë³´ì„¸ìš”.
+echo [ERROR] pip ¼³Ä¡¿¡ ½ÇÆÐÇß½À´Ï´Ù.
+echo [TIP]   Python À» Àç¼³Ä¡ÇÏ°Å³ª °ü¸®ÀÚ ±ÇÇÑÀ¸·Î ½ÇÇàÇØº¸¼¼¿ä.
 pause
 exit /b 2
 :PIP_OK
 
 REM --------------------------------------------------------
-REM [3/5] uv í™•ì¸ ë° ì„¤ì¹˜
+REM [4/6] uv È®ÀÎ ¹× ¼³Ä¡
 REM --------------------------------------------------------
 echo.
-echo [3/5] uv í™•ì¸ ì¤‘...
+echo [4/6] uv È®ÀÎ Áß...
 set "UV_CMD="
 uv --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
@@ -69,14 +98,14 @@ for %%P in (
 ) do (
     if exist %%P ( set "UV_CMD=%%~P" & echo [OK]  uv: %%~P & goto :UV_READY )
 )
-echo [INFO] uv ì—†ìŒ. pip ë¡œ ì„¤ì¹˜í•©ë‹ˆë‹¤...
+echo [INFO] uv ¾øÀ½. pip ·Î ¼³Ä¡ÇÕ´Ï´Ù...
 "!PYTHON!" -m pip install uv --quiet --user
 if %ERRORLEVEL% NEQ 0 (
-    echo [WARNING] uv ì„¤ì¹˜ ì‹¤íŒ¨. pip ë°©ì‹ìœ¼ë¡œ ì „í™˜í•©ë‹ˆë‹¤.
+    echo [WARNING] uv ¼³Ä¡ ½ÇÆÐ. pip ¹æ½ÄÀ¸·Î ÀüÈ¯ÇÕ´Ï´Ù.
     set "USE_PIP_ONLY=1" & goto :DO_INSTALL
 )
 uv --version >nul 2>&1
-if %ERRORLEVEL% EQU 0 ( set "UV_CMD=uv" & echo [OK]  uv ì„¤ì¹˜ ì™„ë£Œ & goto :UV_READY )
+if %ERRORLEVEL% EQU 0 ( set "UV_CMD=uv" & echo [OK]  uv ¼³Ä¡ ¿Ï·á & goto :UV_READY )
 for %%P in (
     "%APPDATA%\Python\Scripts\uv.exe"
     "%APPDATA%\Python\Python313\Scripts\uv.exe"
@@ -86,83 +115,75 @@ for %%P in (
 ) do (
     if exist %%P ( set "UV_CMD=%%~P" & echo [OK]  uv: %%~P & goto :UV_READY )
 )
-echo [WARNING] uv ê²½ë¡œ íƒìƒ‰ ì‹¤íŒ¨. pip ë°©ì‹ìœ¼ë¡œ ì „í™˜í•©ë‹ˆë‹¤.
+echo [WARNING] uv °æ·Î Å½»ö ½ÇÆÐ. pip ¹æ½ÄÀ¸·Î ÀüÈ¯ÇÕ´Ï´Ù.
 set "USE_PIP_ONLY=1" & goto :DO_INSTALL
 :UV_READY
 set "USE_PIP_ONLY=0"
 
 REM --------------------------------------------------------
-REM [4/5] notebooklm-mcp-cli ì„¤ì¹˜
+REM [5/6] notebooklm-mcp-cli ¼³Ä¡
 REM --------------------------------------------------------
 :DO_INSTALL
 echo.
-echo [4/5] notebooklm-mcp-cli ì„¤ì¹˜ ì¤‘...
-echo       (PyPI ì—ì„œ ìµœì‹  ë²„ì „ ë‹¤ìš´ë¡œë“œ. ìž ì‹œ ê¸°ë‹¤ë ¤ì£¼ì„¸ìš”...)
+echo [5/6] notebooklm-mcp-cli ¼³Ä¡ Áß...
+echo       (PyPI ¿¡¼­ ÃÖ½Å ¹öÀü ´Ù¿î·Îµå. Àá½Ã ±â´Ù·ÁÁÖ¼¼¿ä...)
 echo.
 if "!USE_PIP_ONLY!"=="1" (
-    echo [INFO] pip ë°©ì‹ìœ¼ë¡œ ì„¤ì¹˜í•©ë‹ˆë‹¤...
+    echo [INFO] pip ¹æ½ÄÀ¸·Î ¼³Ä¡ÇÕ´Ï´Ù...
     "!PYTHON!" -m pip install notebooklm-mcp-cli --user
     if !ERRORLEVEL! NEQ 0 (
-        echo [ERROR] pip ì„¤ì¹˜ ì‹¤íŒ¨! ì¸í„°ë„· ì—°ê²° í™•ì¸ í›„ ìž¬ì‹œë„í•˜ì„¸ìš”.
+        echo [ERROR] pip ¼³Ä¡ ½ÇÆÐ! ÀÎÅÍ³Ý ¿¬°á È®ÀÎ ÈÄ Àç½ÃµµÇÏ¼¼¿ä.
         pause & exit /b 3
     )
-    echo [OK]  pip ì„¤ì¹˜ ì™„ë£Œ & goto :VERIFY
+    echo [OK]  pip ¼³Ä¡ ¿Ï·á & goto :VERIFY
 )
 "!UV_CMD!" tool install notebooklm-mcp-cli
 if %ERRORLEVEL% NEQ 0 (
-    echo [WARNING] uv ì„¤ì¹˜ ì‹¤íŒ¨. pip ë¡œ ìž¬ì‹œë„í•©ë‹ˆë‹¤...
+    echo [WARNING] uv ¼³Ä¡ ½ÇÆÐ. pip ·Î Àç½ÃµµÇÕ´Ï´Ù...
     "!PYTHON!" -m pip install notebooklm-mcp-cli --user
-    if !ERRORLEVEL! NEQ 0 ( echo [ERROR] ì„¤ì¹˜ ì‹¤íŒ¨! & pause & exit /b 3 )
-    echo [OK]  pip ì„¤ì¹˜ ì™„ë£Œ (fallback) & goto :VERIFY
+    if !ERRORLEVEL! NEQ 0 ( echo [ERROR] ¼³Ä¡ ½ÇÆÐ! & pause & exit /b 3 )
+    echo [OK]  pip ¼³Ä¡ ¿Ï·á (fallback) & goto :VERIFY
 )
-echo [OK]  uv tool install ì™„ë£Œ
+echo [OK]  uv tool install ¿Ï·á
 
 REM --------------------------------------------------------
-REM [5/5] ì„¤ì¹˜ ê²€ì¦
+REM [6/6] ¼³Ä¡ °ËÁõ
 REM --------------------------------------------------------
 :VERIFY
 echo.
-echo [5/5] ì„¤ì¹˜ ê²€ì¦ ì¤‘...
+echo [6/6] ¼³Ä¡ °ËÁõ Áß...
 timeout /t 2 >nul
 nlm --version >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
     for /f "delims=" %%v in ('nlm --version 2^>^&1') do echo [OK]  nlm: %%v
 ) else (
-    echo [WARNING] nlm ì´ ì•„ì§ PATH ì— ì—†ìŠµë‹ˆë‹¤.
-    echo           ìƒˆ cmd ì°½ì„ ì—´ë©´ ì •ìƒ ë™ìž‘í•©ë‹ˆë‹¤.
+    echo [Âü°í] nlm ¸í·ÉÀÌ ¾ÆÁ÷ ÀÌ Ã¢¿¡¼± ¾È ÀâÈú ¼ö ÀÖ½À´Ï´Ù.
+    echo        ¼³Ä¡´Â µÆ°í, RUN.bat À» »õ·Î ½ÇÇàÇÏ¸é Á¤»ó µ¿ÀÛÇÕ´Ï´Ù.
 )
 echo.
 echo ============================================================
-echo   [ì„¤ì¹˜ ì™„ë£Œ]  INSTALLATION COMPLETE
+echo   [¼³Ä¡ ¿Ï·á]  INSTALLATION COMPLETE
 echo ============================================================
 echo.
-echo   ë‹¤ìŒ ë‹¨ê³„:
-echo    1. ì´ ì°½ì„ ë‹«ê³  ìƒˆ cmd ì°½ì„ ì—½ë‹ˆë‹¤
-echo    2. RUN.bat ì‹¤í–‰
-echo    3. ë©”ë‰´ [2ë²ˆ] Google ë¡œê·¸ì¸
-echo    4. ë©”ë‰´ [1ë²ˆ] MCP ì„œë²„ ì‹œìž‘
+echo   ÀÌÁ¦ ¹«¾ùÀ» ÇÏ¸é µÇ³ª¿ä?  (¼ø¼­´ë·Î µû¶óÇÏ¼¼¿ä)
+echo    1. RUN.bat ÆÄÀÏÀ» ´õºíÅ¬¸¯ÇÏ¼¼¿ä  (ÀÌ Ã¢Àº ´Ý¾Æµµ µË´Ï´Ù)
+echo    2. ¸Þ´º¿¡¼­  [S] ½¬¿î ½ÃÀÛ  À» °í¸£¸é Â÷±ÙÂ÷±Ù ¾È³»ÇÕ´Ï´Ù
+echo       (¶Ç´Â [2]·Î ±¸±Û ·Î±×ÀÎ -^> [1]·Î ¼­¹ö ½ÃÀÛ)
 echo.
-echo   MCP ì„¤ì • (Claude Desktop / Cursor / VS Code):
-echo   +-------------------------------------------------+
-echo   ^| {                                               ^|
-echo   ^|   "mcpServers": {                               ^|
-echo   ^|     "notebooklm-mcp": {                        ^|
-echo   ^|       "command": "notebooklm-mcp"              ^|
-echo   ^|     }                                           ^|
-echo   ^|   }                                             ^|
-echo   ^| }                                               ^|
-echo   +-------------------------------------------------+
+echo   AI ºñ¼­(Claude/Cursor)¿¡ ¿¬°áÇÏ·Á¸é?
+echo    RUN.bat ¸Þ´º [15] ¿¡¼­ "ÀÚµ¿ ¿¬°á" À» °í¸£¸é µË´Ï´Ù.
+echo    (¾î·Á¿î ¼³Á¤ ÆÄÀÏÀ» Á÷Á¢ °Çµå¸± ÇÊ¿ä ¾ø½À´Ï´Ù)
 echo.
 pause
 exit /b 0
 
 REM ============================================================
-REM  :FIND_PYTHON  v4 -- ì‹¤ì œ python.exe ì ˆëŒ€ê²½ë¡œë¥¼ PYTHON ì— ì €ìž¥
+REM  :FIND_PYTHON  v4 -- ½ÇÁ¦ python.exe Àý´ë°æ·Î¸¦ PYTHON ¿¡ ÀúÀå
 REM ============================================================
 :FIND_PYTHON
 set "PYTHON="
 
-REM [ë‹¨ê³„1] py ëŸ°ì²˜ -> sys.executable ë¡œ ì‹¤ì œ ê²½ë¡œ ì¶”ì¶œ
+REM [´Ü°è1] py ·±Ã³ -> sys.executable ·Î ½ÇÁ¦ °æ·Î ÃßÃâ
 py -3 --version >nul 2>&1
 if %ERRORLEVEL% NEQ 0 goto :FP_STEP2
 for /f "usebackq delims=" %%P in (`py -3 -c "import sys;print(sys.executable)" 2^>nul`) do (
@@ -170,7 +191,7 @@ for /f "usebackq delims=" %%P in (`py -3 -c "import sys;print(sys.executable)" 2
 )
 
 :FP_STEP2
-REM [ë‹¨ê³„2] where python -> WindowsApps ìŠ¤í… ì œì™¸
+REM [´Ü°è2] where python -> WindowsApps ½ºÅÓ Á¦¿Ü
 for /f "usebackq delims=" %%P in (`where python 2^>nul`) do (
     echo %%P | findstr /i "WindowsApps" >nul 2>&1
     if !ERRORLEVEL! NEQ 0 (
@@ -184,7 +205,7 @@ for /f "usebackq delims=" %%P in (`where python3 2^>nul`) do (
     )
 )
 
-REM [ë‹¨ê³„3] í‘œì¤€ ì„¤ì¹˜ ê²½ë¡œ ì§ì ‘ íƒìƒ‰ (3.10~3.13)
+REM [´Ü°è3] Ç¥ÁØ ¼³Ä¡ °æ·Î Á÷Á¢ Å½»ö (3.10~3.13)
 for %%V in (313 312 311 310) do (
     for %%D in (
         "%LOCALAPPDATA%\Programs\Python\Python%%V\python.exe"
@@ -196,7 +217,7 @@ for %%V in (313 312 311 310) do (
     )
 )
 
-REM [ë‹¨ê³„4] Anaconda / Miniconda
+REM [´Ü°è4] Anaconda / Miniconda
 for %%D in (
     "%USERPROFILE%\anaconda3\python.exe"
     "%USERPROFILE%\miniconda3\python.exe"
@@ -206,13 +227,15 @@ for %%D in (
     if exist %%D ( set "PYTHON=%%~D" & goto :FP_DONE )
 )
 
-REM -- ëª¨ë“  ë‹¨ê³„ ì‹¤íŒ¨ --
+REM -- ¸ðµç ´Ü°è ½ÇÆÐ --
 echo.
-echo [ERROR] Python ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!
-echo         í™•ì¸ ë°©ë²•:
-echo          1. ìƒˆ cmd ì°½ì—ì„œ  py --version  ìž…ë ¥
-echo          2. https://www.python.org/downloads/ ì—ì„œ ìž¬ì„¤ì¹˜
-echo          3. ì„¤ì¹˜ ì‹œ "Add Python to PATH" ë°˜ë“œì‹œ ì²´í¬
+echo [ERROR] Python À» Ã£À» ¼ö ¾ø½À´Ï´Ù!
+echo         ÆÄÀÌ½ãÀº ÀÌ ÇÁ·Î±×·¥ÀÌ µ¹¾Æ°¡´Â µ¥ ²À ÇÊ¿äÇÕ´Ï´Ù.
+echo         ¼³Ä¡ ¹æ¹ý:
+echo          1. https://www.python.org/downloads/ Á¢¼Ó
+echo          2. ³ë¶õ "Download Python" ¹öÆ° Å¬¸¯ ÈÄ ¼³Ä¡
+echo          3. ¼³Ä¡ Ã¹ È­¸é "Add Python to PATH" ¸¦ ¹Ýµå½Ã Ã¼Å©!
+echo          4. ¼³Ä¡ ÈÄ ÀÌ INSTALL.bat À» ´Ù½Ã ½ÇÇàÇÏ¼¼¿ä
 echo.
 goto :FP_FAIL
 

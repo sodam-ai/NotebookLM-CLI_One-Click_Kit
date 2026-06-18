@@ -1,20 +1,43 @@
-# 배포 아카이브 (GitHub Release에 첨부)
+# 배포 아카이브 (GitHub Release에 첨부 / distribution archives)
 *.7z
 *.zip
 *.tar.gz
 
-# Windows 시스템 파일
+# Windows 시스템 파일 / Windows system files
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# 임시 파일
+# 임시 파일 / temporary files
 *.tmp
 *.bak
 *.log
 
-# 에디터
+# 에디터 / editors
 .vscode/
 .idea/
 *.swp
+
+# 문서 PDF 생성용 임시 작업 폴더 / temp build folder for PDF generation
+_build/
+
+# AI 코딩 도구·플러그인 부산물 (커밋 금지) / AI coding-tool & plugin artifacts (never commit)
+.omc/
+.plugin-config/
+.browser-pilot/
+.remember/
+.todos-report.md/
+.complexity-log.md
+.pair-programming-session.md
+_backup_*/
+
+# 민감 정보·자격증명 (방어적 차단) / secrets & credentials (defensive)
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+secrets.*
+credentials.*
